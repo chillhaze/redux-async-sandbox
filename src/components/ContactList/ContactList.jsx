@@ -1,17 +1,25 @@
 import PropTypes from 'prop-types';
 import css from './ContactList.module.css';
+import { useEffect } from 'react';
 import { ContactItem } from './ContactItem';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteContact } from '../../redux/contacts/contacts-actions';
-import {
-  getContacts,
-  getFiltered,
-} from '../../redux/contacts/contacts-selectors';
+import { deleteContact } from 'redux/contacts/contacts-actions';
+import { getContacts, getFiltered } from 'redux/contacts/contacts-selectors';
+
+import * as contactsOperations from 'redux/contacts/contacts-operations';
 
 const ContactList = () => {
   const contacts = useSelector(getContacts);
   const filtered = useSelector(getFiltered);
+  const dispatch = useDispatch();
+
+  console.log(contacts);
+
+  //запускаю fetch через useEffect
+  useEffect(() => {
+    dispatch(contactsOperations.fetchContacts());
+  }, [dispatch]);
 
   //короткая запись, лучше по одному вытягивать значения
   // const { contacts, filtered } = useSelector(state => state.phonebook);
@@ -19,8 +27,6 @@ const ContactList = () => {
   const filteredContacts = contacts.filter(item =>
     item.name.toLowerCase().includes(filtered.toLowerCase()),
   );
-
-  const dispatch = useDispatch();
 
   return (
     <div className={css.container}>

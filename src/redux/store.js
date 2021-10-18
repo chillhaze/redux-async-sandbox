@@ -8,7 +8,7 @@ import {
   PURGE,
   REGISTER,
   persistStore,
-  persistReducer,
+  // persistReducer,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import logger from 'redux-logger';
@@ -25,7 +25,8 @@ const middleware = [
 //Просмотр фунций-прослоек в console.log
 // console.log(middleware);
 
-//--------------стейт в localstorage, без phoneBookReducer.filtered (добавил blacklist)
+//-----------------------------------------
+// стейт в localstorage, без phoneBookReducer.filtered(добавил blacklist)
 const contactsPersistConfig = {
   key: 'contacts',
   storage,
@@ -34,14 +35,16 @@ const contactsPersistConfig = {
 
 export const store = configureStore({
   reducer: {
-    phonebook: persistReducer(contactsPersistConfig, phoneBookReducer),
+    // вариант объекта с local storage, также раскоментировать PersistGate в index.js
+    // phonebook: persistReducer(contactsPersistConfig, phoneBookReducer),
+    phonebook: phoneBookReducer,
   },
   middleware,
   devTools: process.env.NODE_ENV === 'development', //по умолчанию true, можно не указывать их в объекте, включаем только в режиме разработки через NODE_ENV
 });
 //-----------------------------------------
 
-//--------------весь стейт в localstorage
+//----------------------------------------- весь стейт в localstorage
 // const contactsPersistConfig = {
 //   key: 'contacts',
 //   storage,

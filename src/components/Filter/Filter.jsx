@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import css from './Filter.module.css';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { getFiltered } from '../../redux/contacts/contacts-selectors';
-import { changeFilter } from '../../redux/contacts/contacts-actions';
+import { getFiltered } from 'redux/contacts/contacts-selectors';
+import { changeFilter } from 'redux/contacts/contacts-actions';
 
 const Filter = () => {
   //вариант получить filtered без redux/contacts/conatcts-selectors

@@ -1,6 +1,22 @@
 import { createAction } from '@reduxjs/toolkit';
 import { v4 as uuidv4 } from 'uuid';
 
+//---------------------------
+//async actions
+//  Pending
+export const fetchContactsRequest = createAction(
+  'contacts/fetchContactsRequest',
+);
+//  Fulfilled
+export const fetchContactsSuccess = createAction(
+  'contacts/fetchContactsSuccess',
+);
+//  Rejected
+export const fetchContactsError = createAction('contacts/fetchContactsError');
+//если использовать createAsyncThunk из React-Toolkit
+//то async actions будут создаваться автоматически, объявлять их не нужно
+//---------------------------
+
 export const addContact = createAction(
   'contacts/addContact',
   (name, number) => {
